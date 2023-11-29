@@ -1,0 +1,21 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  igs.nodes.abstract.BlockStorageServer:
+    derived_from: tosca.nodes.Storage.ObjectStorage
+    metadata:
+      targetNamespace: "igs.nodes.abstract"
+      abstract: "false"
+      final: "false"
+    properties:
+      name:
+        type: string
+      ip_add:
+        type: string
+    requirements:
+      - host:
+         
+          node: igs.nodes.abstract.OperatingSystem
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    

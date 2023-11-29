@@ -1,0 +1,29 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  igs.nodes.abstract.OperatingSystem:
+    derived_from: tosca.nodes.Compute
+    metadata:
+      targetNamespace: "igs.nodes.abstract"
+      abstract: "false"
+      final: "false"
+    properties:
+      name:
+        type: string
+        required: false
+      os_type:
+        type: string
+        required: false
+
+    requirements:
+      - host:
+          node: igs.nodes.abstract.CloudPlatform
+          capability: tosca.capabilities.Compute
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+
+    capabilities:
+      host:
+        occurrences: [ 1, UNBOUNDED ]
+        valid_source_types: [ igs.nodes.abstract.ContainerRuntime, igs.nodes.abstract.DBMS ]
+        type: tosca.capabilities.Compute
