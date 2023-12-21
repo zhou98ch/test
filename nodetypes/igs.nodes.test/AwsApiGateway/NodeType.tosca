@@ -1,0 +1,55 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  igs.nodes.test.AwsApiGateway:
+    derived_from: tosca.nodes.Compute
+    metadata:
+      targetNamespace: "igs.nodes.test"
+      abstract: "false"
+      final: "false"
+    attributes:
+      bb:
+        description: bbbbbbbbbbbbbb
+        type: string
+      aa:
+        description: aaaaaaaaaaaaaaa
+        type: string
+    properties:
+      version:
+        type: string
+        description: vvvvvvvvv
+      num:
+        type: string
+        description: nnnnnnnn
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          node: tosca.nodes.Compute
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+      - host2:
+          capability: tosca.capabilities.Container
+          node: tosca.nodes.Compute
+          relationship: tosca.relationships.HostedOn
+          occurrences: [ 1, 1 ]
+    interfaces:
+      Standard:
+        type: tosca.interfaces.node.lifecycle.Standard
+        inputs:
+
+        operations:
+          create:
+            implementation:
+              primary: create.yaml
+              timeout: 0
+          configure:
+            implementation:
+              primary: configure.yaml
+              timeout: 0
+    artifacts:
+      create:
+        type: radon.artifacts.Ansible
+        file: create.yml
+      configure:
+        type: radon.artifacts.Ansible
+        file: configure.yml

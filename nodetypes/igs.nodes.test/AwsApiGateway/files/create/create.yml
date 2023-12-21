@@ -1,0 +1,9 @@
+---
+- hosts: all
+  vars:
+    - spec_path: "/tmp/swagger.json"
+  tasks:
+    - name: Check that the swagger.json exists
+      stat:
+        path: "{{ spec_path }}"
+      register: swagger_spec

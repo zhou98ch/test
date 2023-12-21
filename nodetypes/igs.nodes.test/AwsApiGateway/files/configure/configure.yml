@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars:
+    api_gw_stage: "production"
+  tasks:
+    - name: Deploy API gateway
+      aws_api_gateway:
+        state: present
+        swagger_file: "/tmp/swagger.json"
+        stage: "{{ api_gw_stage }}"
+        region: "{{ aws_region }}"
+      register: api_gw
